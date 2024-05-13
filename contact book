@@ -1,0 +1,97 @@
+#Empty list of contacts
+contacts = []
+
+#function for adding contacts
+def add(name, phone_number, email, address):
+    contacts.append({"name": name, "phone_number": phone_number, "email": email, "address": address})
+    print("Added successfully!")
+
+#function for viewing contacts
+def view():
+    if contacts:
+        print("Contact List:")
+        for i, contact in enumerate(contacts, start=1):
+            print(f"{i}. {contact['name']}:{contact['phone_number']}")
+    else:
+        print("Contact list is empty!")
+
+#function for searching contacts
+def search(keyword):
+    for contact in contacts:
+        if keyword.lower() in contact['name'].lower() or keyword in contact['phone_number']: 
+            print("Search Results:")
+            print(f" {contact['name']}:{contact['phone_number']}")
+        else:
+           print("Contact not found!")
+
+#function for updating contacts
+def update(index, name=None, phone_number=None, email=None, address=None):
+    if 0 < index <= len(contacts):
+        contact = contacts[index - 1]
+        contact['name'] = name 
+        contact['phone_number'] = phone_number
+        contact['email'] = email
+        contact['address'] = address 
+        print("Updated successfully!")
+    else:
+        print("Invalid index!")
+
+#function for deleting function
+def delete(index):
+    if 0 < index <= len(contacts):
+        del contacts[index - 1]
+        print("Deleted successfully.")
+    else:
+        print("Invalid index!")
+
+#main function
+def main():
+    while True:
+        print("\nContact Book Menu:")
+        print("1. View ")
+        print("2. Add ")
+        print("3. Search")
+        print("4. Update")
+        print("5. Delete")
+        print("6. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            view()
+
+        elif choice == "2":
+            name = input("Enter name: ")
+            phone_number = input("Enter phone number: ")
+            email = input("Enter email: ")
+            address = input("Enter address: ")
+            add(name, phone_number, email, address)
+
+        elif choice == "3":
+            keyword = input("Enter name or phone number to search: ")
+            search(keyword)
+
+        elif choice == "4":
+            view()
+            index = int(input("Enter the index of the contact you want to update: "))
+            name = input("Enter name: ")
+            phone_number = input("Enter phone number: ")
+            email = input("Enter email id: ")
+            address = input("Enter address: ")
+            update(index, name, phone_number, email, address)
+
+        elif choice == "5":
+            view()
+            index = int(input("Enter the index of the contact you want to delete: "))
+            delete(index)
+
+        elif choice == "6":
+            print("Thank you for using the Contact Book.\N{grinning face}")
+            break
+
+        else:
+            print("Choose a valid option!!!")
+
+#function call will start from here
+if __name__ == "__main__":
+    main()
